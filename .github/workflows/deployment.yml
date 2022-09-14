@@ -11,10 +11,4 @@ jobs:
       run: echo ${GITHUB_REF}
 
     - name: Echo tag 2
-      run: echo ${GITHUB_REF#refs/*}
-      
-    - name: Echo tag 3
-      run: echo ${GITHUB_REF#refs/v*}
-
-    - name: Echo tag 4
-      run: echo ${GITHUB_REF#v/*}
+      run: echo ${GITHUB_REF#refs/tags/v*}
