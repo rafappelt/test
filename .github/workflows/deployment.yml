@@ -6,9 +6,8 @@ jobs:
   deployment:
     runs-on: 'ubuntu-latest'
     steps:
-
+    - name: Get tag
+      id: vars
+      run: echo ::set-output name=tag::${GITHUB_REF#refs/tags/v*}
     - name: Echo tag
-      run: echo ${GITHUB_REF}
-
-    - name: Echo tag 2
-      run: echo ${GITHUB_REF#refs/tags/v*}
+      run: echo ${{ steps.vars.outputs.tag }}
