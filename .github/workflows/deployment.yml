@@ -1,0 +1,15 @@
+name: Deploy
+on:
+  release:
+    types: [published]
+jobs:
+  deployment:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Display raw tag
+      env:
+        RAW_VERSION: "${{ github.ref_name }}"
+      run: echo "RAW_VERSION ${RAW_VERSION}"
