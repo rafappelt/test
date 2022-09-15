@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: Get raw tag
       id: vars
-      run: echo ::set-output name=tag::${GITHUB_REF}
+      run: echo ${GITHUB_REF}
 
     - name: Get tag
       id: vars
