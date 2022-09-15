@@ -8,7 +8,6 @@ jobs:
     runs-on: 'ubuntu-latest'
     steps:
     - name: Get raw tag
-      id: vars
       run: echo ${GITHUB_REF}
 
     - name: Get tag
