@@ -1,18 +1,25 @@
 name: Deploy
-on:
-  push:
-    tags:
-      - 'v*'
+on: [push]
 jobs:
   deployment:
     runs-on: 'ubuntu-latest'
     steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Get raw tag
       run: echo ${GITHUB_REF}
-
-    - name: Get tag
-      id: vars
-      run: echo ::set-output name=tag::${GITHUB_REF#refs/*/v}
-      
-    - name: Echo tag
-      run: echo ${{ steps.vars.outputs.tag }}
+    - name: Echo reference
+      run: echo $(case "$GITHUB_REF" in "origin/main") echo "main~1" ;; *) echo "origin/main" ;; esac)
+    - name: diff
+      id: diff
+      run: >
+        echo ::set-output
+        name=chains_versions::$(
+        git --no-pager diff
+        $(case "$GITHUB_REF" in "origin/main") echo "main~1" ;; *) echo "origin/main" ;; esac)
+        --name-only | paste -sd ' ')
+    - name: echo diff
+      env:
+        CHAINS_VERSION: ${{ steps.diff.outputs.chains_versions }}
+      run: echo $CHAINS_VERSION
