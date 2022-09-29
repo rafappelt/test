@@ -7,7 +7,7 @@ jobs:
     - name: Get raw tag
       run: echo ${GITHUB_REF}
     - name: Echo reference
-      run: echo $(case "$GITHUB_REF" in; "main") echo "main~1" ;; *) echo "origin/main" ;; esac)
+      run: echo $(case "$GITHUB_REF" in "main") echo "main~1" ;; *) echo "origin/main" ;; esac)
     - name: diff
       id: diff
       run: >
