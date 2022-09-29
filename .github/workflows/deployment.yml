@@ -14,7 +14,7 @@ jobs:
         echo ::set-output
         name=chains_versions::$(
         git --no-pager diff
-        $(case "$GITHUB_REF" in; "main") echo "main~1" ;; *) echo "origin/main" ;; esac)
+        $(case "$GITHUB_REF" in "main") echo "main~1" ;; *) echo "origin/main" ;; esac)
         --name-only | paste -sd ' ')
     - name: echo diff
       env:
