@@ -1,25 +1,14 @@
 name: Deploy
-on: [push]
+on:
+  release:
+    types: [published]
 jobs:
   deployment:
+    if: startsWith(github.ref, 'refs/tags/nodes-dashboard-v')
     runs-on: 'ubuntu-latest'
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - name: Get raw tag
-      run: echo ${GITHUB_REF}
-    - name: Echo reference
-      run: echo $(case "$GITHUB_REF" in "refs/heads/main") echo "main~1" ;; *) echo "origin/main" ;; esac)
-    - name: diff
-      id: diff
-      run: >
-        echo ::set-output
-        name=chains_versions::$(
-        git --no-pager diff
-        $(case "$GITHUB_REF" in "refs/heads/main") echo "main~1" ;; *) echo "origin/main" ;; esac)
-        --name-only | paste -sd ' ')
-    - name: echo diff
-      env:
-        CHAINS_VERSION: ${{ steps.diff.outputs.chains_versions }}
-      run: echo $CHAINS_VERSION
+    - name: Display raw tag
+      run: echo "GITHUB_REF ${GITHUB_REF}"
