@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    schedule:
+      interval: daily
+    directory: "/nodes-dashboard"
+    commit-message:
+      prefix: "nodes-dashboard: "
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: daily
+    commit-message:
+      prefix: "snapshot-server: "
