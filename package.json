@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/rafappelt/test/issues"
   },
-  "homepage": "https://github.com/rafappelt/test#readme"
+  "homepage": "https://github.com/rafappelt/test#readme",
+  "dependencies": {
+    "word-wrap": "^1.2.3"
+  }
 }
