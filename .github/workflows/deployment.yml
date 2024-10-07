@@ -11,4 +11,6 @@ jobs:
       with:
         fetch-depth: 0
     - name: Display raw tag
-      run: echo "GITHUB_REF ${GITHUB_REF}"
+      env:
+        RAW_VERSION: "${{ github.ref_name }}"
+      run: echo "RAW_VERSION ${RAW_VERSION}"
